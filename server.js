@@ -36,11 +36,13 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    userName = users.filter((user) => user.id === socket.id)[0].name;
-    users = users.filter((user) => user.id !== socket.id);
-    socket.broadcast.emit('message', {
-      author: 'Chatbot',
-      content: `<i>${userName} has left the conversation... :(`,
-    });
+    if (users.length > 0) {
+      userName = users.filter((user) => user.id === socket.id)[0].name;
+      users = users.filter((user) => user.id !== socket.id);
+      socket.broadcast.emit('message', {
+        author: 'Chatbot',
+        content: `<i>${userName} has left the conversation... :(`,
+      });
+    }
   });
 });

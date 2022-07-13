@@ -25,7 +25,7 @@ function login(event) {
 function sendMessage(e) {
   e.preventDefault();
 
-  if (messageContentInput == '') {
+  if (!messageContentInput.value) {
     alert('Message field can\t be empty!');
   } else {
     addMessage(userName, messageContentInput.value);

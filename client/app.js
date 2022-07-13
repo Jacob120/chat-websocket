@@ -1,5 +1,8 @@
-// select
+// Websocket
+const socket = io();
+socket.on('message', ({ author, content }) => addMessage(author, content));
 
+// select
 const loginForm = document.getElementById('welcome-form');
 const messagesSection = document.getElementById('messages-section');
 const messagesList = document.getElementById('messages-list');
@@ -29,6 +32,10 @@ function sendMessage(e) {
     alert('Message field can\t be empty!');
   } else {
     addMessage(userName, messageContentInput.value);
+    socket.emit('message', {
+      author: userName,
+      content: messageContentInput.value,
+    });
     messageContentInput.value = '';
   }
 }
